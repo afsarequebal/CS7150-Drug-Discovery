@@ -8,4 +8,5 @@ Set up the webhook exactly as you see in the image below, so that it sends notif
 
 <img src="webhook.png" style="max-width:100%">
 
-Then whenever you push your website, it will show up on https://expo.baulab.info/2022-Fall/[username]/[projectname].
+Then whenever you push your website, it will show up on
+https://expo.baulab.info/2022-Fall/[username].
