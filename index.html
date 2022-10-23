@@ -111,10 +111,17 @@ Hyperparameters:<br>
 &emsp;5) Message passing layer: There are two message passing layers. It can vary from 2-5.<br>
 &emsp;6) Network/Architecture size: There are two graph convolution layers and two fully connected layers. Both graph and full connected layers can vary &emsp; &emsp;from 2-5 layers.<br>
 <br>
-<h4>Implementation plans<h4>
+<h4>Implementation plans</h4>
 
-Step1> Download molecules data from <p style="color:blue;font-size:18px;"> <a href = "https://pubchem.ncbi.nlm.nih.gov/bioassay/1285">"https://pubchem.ncbi.nlm.nih.gov/bioassay/1285"</a><p>
-
+Step 1) Download molecules data from <p style="color:blue;font-size:18px;"> <a href = "https://pubchem.ncbi.nlm.nih.gov/bioassay/1285">"https://pubchem.ncbi.nlm.nih.gov/bioassay/1285"</a><p>
+<br>
+Step 2) Data prepocessing : Perform exploratory data analysis to convert molecules represented in a smiles string to a graph representation.
+<br>
+Step 3) Model building : Use the Deep chem libraries to for training the model and customize hyperparameters.
+<br>
+Step 4) Training and model evaluation: We will generate accuracy, AUC, ROC curve to evaluate its performance.
+<br>
+Step 5) Compare the performance of graph neural network against Support vector machine.
 <br>
 <br>
 
