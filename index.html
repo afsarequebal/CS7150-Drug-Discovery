@@ -76,18 +76,18 @@ used above, however aimed to predict the bioactivity against the Amyloid peptide
 <h3>Milestone 2</h3>   
 <h3>Main Method implemented implemented/reproduced</h3>                                                                                   
 <img src="gnnArchitecture.png" alt="Graph Neural Network" width="500" height="500"><br>                                                                                     
-Molecules can be easily represented as a graph where each node represent an atom type and each edge represent bond type.<br>
-Each molecule is represented using three matrix<br>
-1) Adjacency Matrix: Here each row and column represent an atom. It marks a cell as one if there is an edge between two nodes.<br>
+Molecule can be easily represented as a graph where each node represent an atom type and each edge represent bond type.<br>
+Each molecule is represented using three matrices<br>
+1) Adjacency Matrix : Here each row and column represent an atom. It marks a cell as one if there is an edge between two nodes.<br>
 2) Atom feature matrix : Here row represents an atom and column represent atom features like atom type, number of neutrons.<br>
 3) Edge feature matrix : Here each row represents an atom and column represent bond type. For example single and double bond.<br>
-
+<br><br>
 Our task is predict whether a molecule is drug or not for which we can use a fully connected network.<br> 
 If we pass atom feature and edge feature directly to the neural network, the network will not utilise the connection between atoms. 
 To overcome this, graph neural network helps to create node embedding which retains information about atom features, and connected atom features.<br>
-
+<br><br>
 The three sub-structures in the above diagrams is described below:
-1)Graph convolution layer: It uses below function to convert atom features into node embedding.<br>
+1) Graph convolution layer : It uses below function to convert atom features into node embedding.<br>
 <img src="messageFunction.png" alt="Graph Neural Network" width="200" height="60"><br> 
 Here h is a fuction representing the state of an atom i at timestamp t. The Message function takes as input state of an atom, the state of neighboring atoms and its atom features. <br>
 
