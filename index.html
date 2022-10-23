@@ -76,16 +76,31 @@ used above, however aimed to predict the bioactivity against the Amyloid peptide
 <h3>Milestone 2</h3>   
 <h3>Main Method implemented implemented/reproduced</h3>                                                                                   
 <img src="gnnArchitecture.png" alt="Graph Neural Network" width="500" height="500"><br>                                                                                     
-The molecules can be easily represented as a graph where each node represent an atom type and each edge represent bond type.
-Graph neural network helps to learn about the adjacent nodes using message passing function. It helps an atom to discover its neighbors. <br>
+Molecules can be easily represented as a graph where each node represent an atom type and each edge represent bond type.<br>
 Each molecule is represented using three matrix<br>
 1) Adjacency Matrix: Here each row and column represent an atom. It marks a cell as one if there is an edge between two nodes.<br>
 2) Atom feature matrix : Here row represents an atom and column represent atom features like atom type, number of neutrons.<br>
 3) Edge feature matrix : Here each row represents an atom and column represent bond type. For example single and double bond.<br>
 
 Our task is predict whether a molecule is drug or not for which we can use a fully connected network.<br> 
-<img src="messageFunction.png" alt="Graph Neural Network" width="200" height="60"><br>
-If we pass only
+If we pass atom feature and edge feature directly to the neural network, the network will not utilise the connection between atoms. 
+To overcome this, graph neural network helps to create node embedding which retains information about atom features, and connected atom features.<br>
+
+The three sub-structures in the above diagrams is described below:
+1)Graph convolution layer: It uses below function to convert atom features into node embedding.<br>
+<img src="messageFunction.png" alt="Graph Neural Network" width="200" height="60"><br> 
+Here h is a fuction representing the state of an atom i at timestamp t. The Message function takes as input state of an atom, the state of neighboring atoms and its atom features. <br>
+
+It applies three fuctions to the input<br>
+1) Transform : It is matrix multiplication of adjacency matrix and edge matrix. <br>
+2) Aggregate : It is normalization of transformed matrix. <br>
+3) Update : In this the aggregated input and atom feature itself is passed through neural network to create node embedding.  <br>
+
+2) Global sum pooling layer: The node embedding created in GNN is not useful becuase each node have different size. So, in this layer, mean/sum of all the columns are taken and a new embedding is created with equal size by adding zero padding <br>
+
+3) Fully connected layer: The node embedding created in global sum pooling layer is now passed through a fully connected layer, that predicts whether a molecule is a drug.
+
+<br>
 
 <br>
 <h3>References</h3>
