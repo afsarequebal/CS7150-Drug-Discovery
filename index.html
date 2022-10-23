@@ -75,10 +75,19 @@ used above, however aimed to predict the bioactivity against the Amyloid peptide
 
 <h3>Milestone 2</h3>   
 <h3>Main Method implemented implemented/reproduced</h3>                                                                                   
-<img src="gnnArchitecture.png" alt="Graph Neural Network" width="500" height="500">   
-<br>                                                                                  
-The molecules can be easily represented as a graph where each node represent an atom type and each edge represent bond type. Graph neural network
-helps to learn about the adjacent nodes using message passing function. It helps an atom to discover its neighbors. So, the graph neural network 
+<img src="gnnArchitecture.png" alt="Graph Neural Network" width="500" height="500"><br>                                                                                     
+The molecules can be easily represented as a graph where each node represent an atom type and each edge represent bond type.
+Graph neural network helps to learn about the adjacent nodes using message passing function. It helps an atom to discover its neighbors. 
+Each molecule is represented using three matrix
+1) Adjacency Matrix: Here each row and column represent an atom. It marks a cell as one if there is an edge between two nodes.
+2) Atom feature matrix : Here row represents an atom and column represent atom features like atom type, number of neutrons.
+3) Edge feature matrix : Here each row represents an atom and column represent bond type. For example single and double bond.
+
+Our task is predict whether a molecule is drug or not for which we can use a fully connected network. 
+<img src="messageFunction.png" alt="Graph Neural Network" width="500" height="500"><br>
+If we pass only
+
+<br>
 <h3>References</h3>
 
 <p><a href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[1] Stokes, J.M., Yang, K..., Collins, J. (2020).
