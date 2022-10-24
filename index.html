@@ -72,59 +72,141 @@ impact on the Amyloid peptide <a href="https://pubchem.ncbi.nlm.nih.gov/bioassay
 used above, however aimed to predict the bioactivity against the Amyloid peptide.
 
 <br><br>
+<hr>
 
-<h3>Milestone 2</h3>   
-<h4>Main Method implemented implemented/reproduced</h4>                                                                                   
-<img src="gnnArchitecture.png" alt="Graph Neural Network" width="500" height="500"><br>                                                                                     
-Molecule can be easily represented as a graph where each node represent an atom type and each edge represent bond type.<br>
-Each molecule is represented using three matrices<br>
-1) Adjacency Matrix : Here each row and column represent an atom. It marks a cell as one if there is an edge between two nodes.<br>
-2) Atom feature matrix : Here row represents an atom and column represent atom features like atom type, number of neutrons.<br>
-3) Edge feature matrix : Here each row represents an atom and column represent bond type. For example single and double bond.<br>
+<h3>Milestone 2</h3>
 <br>
-Our task is predict whether a molecule is drug or not for which we can use a fully connected network.<br> 
-If we pass atom feature and edge feature directly to the neural network, the network will not utilise the connection between atoms. 
-To overcome this, graph neural network helps to create node embedding which retains information about atom features, and connected atom features.<br>
+
+<p>
+Stokes and colleagues made a large impact in the drug discovery field using graph neural
+ networks to identify novel antibiotics inhibiting the growth of E.coli. This was a big change from the standard
+ use of deep learning in drug discovery, which typically used concrete molecular properties as inputs to their models.
+ In their paper, they used a message passing deep neural network to translate a graph representation of the molecules into
+ a 1-dimensional vector. Along with additional optimization techniques, Stokes took advantage of the graph neural networks'
+ability to learn new feature vectors to nominate multiple compounds displaying antibiotic resistant activity.
+
+The image below is a visualization of a graph neural network architecture, similar to what Stokes and colleagues may have used.
+</p>
+
+
+<img src="gnnArchitecture.png" alt="Graph Neural Network" width="500" height="500"><br>
+Source: Machine Learning with PyTorch and Scikit-Learn (2022) <a href="https://learning.oreilly.com/library/view/machine-learning-with/9781801819312/">[5]</a><br>
+<br><br>
+<h5>Conceptual Review</h5>
 <br>
-The three sub-structures in the above diagrams is described below:<br>
-1) Graph convolution layer : It uses below function to convert atom features into node embedding.<br>
-<img src="messageFunction.png" alt="Graph Neural Network" width="200" height="60"><br> 
+In a graph neural network, a molecule can be easily represented as a graph where each node represent an atom type and each edge represent bond type.
+Therefore each molecule is represented using three matrices:<br><br>
+<ol>
+  <li>Adjacency Matrix : Each row and column represent an atom. It marks a cell as 1 if there is an edge between two nodes.
+  </li>
+  <li>Atom feature matrix : Each row represents an atom and column represent atom features like atom type, number of neutrons.
+  </li>
+  <li>Edge feature matrix : Each row represents an atom and column represent bond type. For example single and double bond.
+  </li>
+</ol>
+
+
+<br>
+A large reason we are using the graph neural network architecture is to overcome the limitations of the standard feed-forward neural network.
+For this project, our task is to predict whether a molecule inhibits levels of a protein implicated in Alzheimer's Disease.<br>
+If we were to use a standard feed-forward neural network and pass the atom feature and edge feature directly to the neural network, the network will not
+use all of the relevent information (such as the connection between atoms). To overcome this, graph neural network helps to create node embedding
+which retains information about atom features as well as connected atom features.<br>
+
+<br>
+The three sub-structures in the image above is described below:<br><br>
+<b>Graph Convolution Layer</b> <br><br>
+  The graph convolutional layer uses the below function to convert atom features into node embedding.<br>
+<img src="messageFunction.png" alt="Graph Neural Network" width="200" height="60"><br>
 Here h is a fuction representing the state of an atom i at timestamp t. The Message function takes as input state of an atom, the state of neighboring atoms and its atom features. <br>
+
 <br>
-It applies three fuctions to the input<br>
- &emsp; a) Transform : It is matrix multiplication of adjacency matrix and edge matrix. <br>
- &emsp; b) Aggregate : It is normalization of transformed matrix. <br>
- &emsp; c) Update : In this the aggregated input and atom feature itself is passed through neural network to create node embedding.  <br>
+The overall function further applies three fuctions to the input<br>
+<ol>
+  <li>Transform : It is matrix multiplication of adjacency matrix and edge matrix.
+  </li>
+  <li> Aggregate : It is normalization of transformed matrix.
+  </li>
+  <li>Update : In this the aggregated input and atom feature itself is passed through neural network to create node embedding.
+  </li>
+</ol>
+
+
 <br>
-2) Global sum pooling layer: The node embedding created in GNN is not useful becuase each node have different size. So, in this layer, mean/sum of all the columns are taken and a new embedding is created with equal size by adding zero padding <br>
+<b>Global Sum Pooling Layer</b><br>
+The node embedding created in GNN is not useful becuase each node have different size. So, in this layer, mean/sum of all the columns are taken and a new embedding is created with equal size by adding zero padding <br>
+
 <br>
-3) Fully connected layer: The node embedding created in global sum pooling layer is now passed through a fully connected layer, that predicts whether a molecule is a drug.
+<b>Fully Connected Layer</b><br>
+The node embedding created in global sum pooling layer is now passed through a fully connected layer, that predicts whether a molecule is a drug.
 
 <br>
 <br>
-<h4>Implementation details</h4>
-Hyperparameters:<br>
-&emsp;1) Input size : There are 193158 molecules and divided into 60% training data, 20% test data and 20% validation data.<br>
-&emsp;2) Weight Decay : Weight decay as 0. It can vary from 0.001 to 0.01.<br>
-&emsp;3) Dropout : It is initialized as 0.<br> 
-&emsp;4) Node embedding size: The node embedding features are initialized as 128 and can increase upto 256.<br>
-&emsp;5) Message passing layer: There are two message passing layers. It can vary from 2-5.<br>
-&emsp;6) Network/Architecture size: There are two graph convolution layers and two fully connected layers. Both graph and full connected layers can vary &emsp; &emsp;from 2-5 layers.<br>
 <br>
-<h4>Implementation plans</h4>
+<h4>Graph Neural Network Implementation</h4>
+<br>
+<b>Hyperparameters</b><br>
+<ol>
+  <li>Input size : There are 193158 molecules and divided into 80% training data, 10% test data and 10% validation data.
+  </li>
+  <li> Weight Decay : Weight decay as 0. It can vary from 0.001 to 0.01.
+  </li>
+  <li> Dropout : It is initialized as 0.
+  </li>
+  <li> Node embedding size: The node embedding features are initialized as 128 and can increase upto 256.
+  </li>
+  <li> Message passing layer: There are two message passing layers. It can vary from 2-5.
+  </li>
+  <li> Network/Architecture size: There are two graph convolution layers and two fully connected layers. Both graph and full connected layers can vary from 2-5 layers
+  </li>
+</ol>
 
-Step 1) Download molecules data from <a href = "https://pubchem.ncbi.nlm.nih.gov/bioassay/1285">"https://pubchem.ncbi.nlm.nih.gov/bioassay/1285"</a>
 <br>
-Step 2) Data prepocessing : Perform exploratory data analysis to convert molecules represented in a smiles string to a graph representation.
-<br>
-Step 3) Model building : Use the Deep chem libraries to for training the model and customize hyperparameters.
-<br>
-Step 4) Training and model evaluation: We will generate accuracy, AUC, ROC curve to evaluate its performance.
-<br>
-Step 5) Compare the performance of graph neural network against Support vector machine.
-<br>
-<br>
+<h4>Current Progress</h4>
 
+<ul>
+  <li> Downloaded the bioassay experiment data as well as compound information from the PubChem Database.
+  </li>
+  <li> Performed exploratory data analysis to visualize patterns in the data overall, as well as separated by target label.
+  </li>
+  <li> Used DeepChem to convert each molecule into a graph representation.
+  </li>
+  <li> Used the DeepChem Graph Convolutional Model to predict whether or not a compound would inhibit levels of the protein.
+  </li>
+</ul>
+As of now, we have only tested out the DeepChem in-house models, and will perform further testing in the future. Below are two plots that
+were found from initial analysis.
+
+Essentially, our model has performed fairly well considering the little tuning we have done to the models. When passing our validation data into
+model we have achieved a recall score of 78%, precision score of 71%, as well as an accuracy of 71%.
+
+<br><br><br>
+<div class="row">
+  <div class="column">
+    <img src="confusion_matrix.png" alt="Snow" width="400">
+  </div>
+  <div class="column">
+    <img src="roc_curve_validation.png" alt="Mountains" width="400">
+  </div>
+</div>
+
+<br>
+<h4>Next Steps</h4>
+
+<ul>
+  <li> Model building : The current model implemented in our project is the out-of-the-box model provided by DeepChem. We would like to use our current results to
+    build off of this model and create custom layers and parameters.
+  </li>
+  <li> Experiment and performance comparison(In progress): We will use support vector machine as an alternative model. It takes Morgan fingerprint as an input \
+    and performs classification. We will then do comparison of the performance of neural network model and SVM. If time permits we will try to build random forest model and compare its performance with feed-forward neural network model
+  </li>
+</ul>
+
+
+<br>
+<h5><a href='https://github.com/hjombach/Drug_Discovery_Alzheimers_Protein'> GitHub Link</a></h5>
+<br>
+<hr>
 <h3>References</h3>
 
 <p><a href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[1] Stokes, J.M., Yang, K..., Collins, J. (2020).
@@ -144,9 +226,8 @@ Step 5) Compare the performance of graph neural network against Support vector m
   Molecular Screening Center. Retrieved September 28, 2022 from https://pubchem.ncbi.nlm.nih.gov/bioassay/1276.</a>
 </p>
 
-
-
-
+<p><a href="https://learning.oreilly.com/library/view/machine-learning-with/9781801819312/">[5] Raschka, S., Liu, Y., Mirjalili, V., &amp; Dzhulgakov, D. (2022). Machine learning with pytorch and scikit-learn develop machine learning and deep learning models with python. Packt Publishing.
+</a></p>
 
 
 <h2>Team Members</h2>
