@@ -54,40 +54,7 @@
 <br><br>
 <h3>Related Work</h3>
 
-<p>
-Historically, neural networks in drug discovery used the fixed chemical properties of
-molecules as feature input into neural networks. These networks could then predict
-the efficacy/activity of a suggested compound given its chemical properties. <br><br>
-
-In 2020, Collins and colleagues <a href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[1]</a>
-were able to utilize graph convolutions to produce trainable molecular features for use in their neural networks.
-These trainable features were then fed into a feed-forward neural network to predict the binary outcome; if the compund
-would act as an antibiotic towards E. coli. This new utilization of graph neural networks to train molecular features led to
-the discovery of a novel antibiotic, one that was structurally unique to other antibiotics. <br><br>
-
-The use of neural networks to predict novel treatments of disease is widespread, and includes many areas of medicine and disease. Alzheimer's Disease is a
-well known disease that impacts the lives of many people. The amyloid peptides play a large role in the pathogenesis of the disease,
-largely related to their dysfunction <a href="https://pubmed.ncbi.nlm.nih.gov/24493463/">[2]</a>. Although the Disease impacts such a large population,
-little is known about the underlying biological mechanism as a whole, and thus treatments are limited.
-
-
 <h3>Proposal</h3>
-
-The proposed project for this course involves the reproduction and alteration of Collins work with antibiotics to predict
-novel compounds which may be effective in the treatment of Alzheimer's Disease, via interaction with the amyloid peptide. This would
-include the use of the open source code in the Chemprop library <a href="https://github.com/chemprop/chemprop">[3]</a>. The open source
-code would give us a solid foundation to build on this project and allow us to experiment with and make modifications to the model.
-<br><br>
-
- Pubchem is a well-known source for chemical
-and drug-related information. One element of the database is the experimental data of biological compounds and their effect on biological
-targets of interest. In our proposal, we aim to use the experimental data from Pubchem on which compounds display bioactivity against the Amyloid
-peptide implicated in Alzheimer's Disease. This bioassay database provides experimental data for nearly 200,000 compounds and their activity /
-impact on the Amyloid peptide <a href="https://pubchem.ncbi.nlm.nih.gov/bioassay/1276">[4]</a>. By using this data, we can incorporate a network to predict the binary classification outcome comparable to Collins
-used above, however aimed to predict the bioactivity against the Amyloid peptide.
-
-<br><br>
-<hr>
 
 <h4>Next Steps</h4>
 
@@ -106,26 +73,6 @@ used above, however aimed to predict the bioactivity against the Amyloid peptide
 <br>
 <hr>
 <h3>References</h3>
-
-<p><a href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[1] Stokes, J.M., Yang, K..., Collins, J. (2020).
-  A Deep Learning Approach to Antibiotic Discovery, Cell, 180:4, 688-702.</a>
-</p>
-<a href="https://github.com/chemprop/chemprop">[2] Bloom GS. Amyloid-β and tau: the trigger and bullet in Alzheimer disease pathogenesis. JAMA Neurol.
-  2014 Apr;71(4):505-8. doi: 10.1001/jamaneurol.2013.5847. PMID: 24493463.</a>
-<p>
-
-</p>
-<a href="https://github.com/chemprop/chemprop">[3] Chemprop 2020 </a>
-<p>
-
-</p>
-
-<p><a href="https://pubchem.ncbi.nlm.nih.gov/bioassay/1276"> [4] National Center for Biotechnology Information (2022). PubChem Bioassay Record for AID 1276, Source: Columbia University
-  Molecular Screening Center. Retrieved September 28, 2022 from https://pubchem.ncbi.nlm.nih.gov/bioassay/1276.</a>
-</p>
-
-<p><a href="https://learning.oreilly.com/library/view/machine-learning-with/9781801819312/">[5] Raschka, S., Liu, Y., Mirjalili, V., &amp; Dzhulgakov, D. (2022). Machine learning with pytorch and scikit-learn develop machine learning and deep learning models with python. Packt Publishing.
-</a></p>
 
 
 <h2>Team Members</h2>
