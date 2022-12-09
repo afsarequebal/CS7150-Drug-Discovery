@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>CS 7150 Drug Discovery</title>
+<meta property="og:title" content=Your Project Name" />
+<meta name="twitter:title" content="Your Project Name" />
+<meta name="description" content="Your project about your cool topic described right here." />
+<meta property="og:description" content="Your project about your cool topic described right here." />
+<meta name="twitter:description" content="Your project about your cool topic described right here." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- bootstrap for mobile-friendly layout -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+<style>
+.fcc-btn {
+  background-color: #199319;
+  color: blue;
+  width:100px;
+  height:20px;                                    
+}
+</style>
+</head>
+<body class="nd-docs">
+<div class="nd-pageheader">
+ <div class="container">
+ <h1 class="lead">
+ <nobr class="widenobr">Graph Convolutions and Drug Discovery</nobr>
+ <nobr class="widenobr">For CS 7150</nobr>
+ </h1>
+ </div>
+</div><!-- end nd-pageheader -->
+
+<a class="fcc-btn" href="milestone3.html">Milestone 3</a>
+
+<div class="container">
+<div class="row">
+<div class="col justify-content-center text-center">
+<h2>Can Graph Convolutions Improve Drug Discovery for Alzheimer's Disease?</h2>
+</div>
+</div>
+<div class="row">
+<div class="col">
+<br><br>
+<h3>Related Work</h3>
+
+<p>
+Historically, neural networks in drug discovery used the fixed chemical properties of
+molecules as feature input into neural networks. These networks could then predict
+the efficacy/activity of a suggested compound given its chemical properties. <br><br>
+
+In 2020, Collins and colleagues <a href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[1]</a>
+were able to utilize graph convolutions to produce trainable molecular features for use in their neural networks.
+These trainable features were then fed into a feed-forward neural network to predict the binary outcome; if the compund
+would act as an antibiotic towards E. coli. This new utilization of graph neural networks to train molecular features led to
+the discovery of a novel antibiotic, one that was structurally unique to other antibiotics. <br><br>
+
+The use of neural networks to predict novel treatments of disease is widespread, and includes many areas of medicine and disease. Alzheimer's Disease is a
+well known disease that impacts the lives of many people. The amyloid peptides play a large role in the pathogenesis of the disease,
+largely related to their dysfunction <a href="https://pubmed.ncbi.nlm.nih.gov/24493463/">[2]</a>. Although the Disease impacts such a large population,
+little is known about the underlying biological mechanism as a whole, and thus treatments are limited.
+
+
+<h3>Proposal</h3>
+
+The proposed project for this course involves the reproduction and alteration of Collins work with antibiotics to predict
+novel compounds which may be effective in the treatment of Alzheimer's Disease, via interaction with the amyloid peptide. This would
+include the use of the open source code in the Chemprop library <a href="https://github.com/chemprop/chemprop">[3]</a>. The open source
+code would give us a solid foundation to build on this project and allow us to experiment with and make modifications to the model.
+<br><br>
+
+ Pubchem is a well-known source for chemical
+and drug-related information. One element of the database is the experimental data of biological compounds and their effect on biological
+targets of interest. In our proposal, we aim to use the experimental data from Pubchem on which compounds display bioactivity against the Amyloid
+peptide implicated in Alzheimer's Disease. This bioassay database provides experimental data for nearly 200,000 compounds and their activity /
+impact on the Amyloid peptide <a href="https://pubchem.ncbi.nlm.nih.gov/bioassay/1276">[4]</a>. By using this data, we can incorporate a network to predict the binary classification outcome comparable to Collins
+used above, however aimed to predict the bioactivity against the Amyloid peptide.
+
+<br><br>
+<hr>
+
+<h4>Next Steps</h4>
+
+<ul>
+  <li> Model building : The current model implemented in our project is the out-of-the-box model provided by DeepChem. We would like to use our current results to
+    build off of this model and create custom layers and parameters.
+  </li>
+  <li> Experiment and performance comparison(In progress): We will use support vector machine as an alternative model. It takes Morgan fingerprint as an input \
+    and performs classification. We will then do comparison of the performance of neural network model and SVM. If time permits we will try to build random forest model and compare its performance with feed-forward neural network model
+  </li>
+</ul>
+
+
+<br>
+<h5><a href='https://github.com/hjombach/Drug_Discovery_Alzheimers_Protein'> GitHub Link</a></h5>
+<br>
+<hr>
+<h3>References</h3>
+
+<p><a href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[1] Stokes, J.M., Yang, K..., Collins, J. (2020).
+  A Deep Learning Approach to Antibiotic Discovery, Cell, 180:4, 688-702.</a>
+</p>
+<a href="https://github.com/chemprop/chemprop">[2] Bloom GS. Amyloid-β and tau: the trigger and bullet in Alzheimer disease pathogenesis. JAMA Neurol.
+  2014 Apr;71(4):505-8. doi: 10.1001/jamaneurol.2013.5847. PMID: 24493463.</a>
+<p>
+
+</p>
+<a href="https://github.com/chemprop/chemprop">[3] Chemprop 2020 </a>
+<p>
+
+</p>
+
+<p><a href="https://pubchem.ncbi.nlm.nih.gov/bioassay/1276"> [4] National Center for Biotechnology Information (2022). PubChem Bioassay Record for AID 1276, Source: Columbia University
+  Molecular Screening Center. Retrieved September 28, 2022 from https://pubchem.ncbi.nlm.nih.gov/bioassay/1276.</a>
+</p>
+
+<p><a href="https://learning.oreilly.com/library/view/machine-learning-with/9781801819312/">[5] Raschka, S., Liu, Y., Mirjalili, V., &amp; Dzhulgakov, D. (2022). Machine learning with pytorch and scikit-learn develop machine learning and deep learning models with python. Packt Publishing.
+</a></p>
+
+
+<h2>Team Members</h2>
+
+<p>Afsar Equebal and Hendrik Ombach. <br>
+
+
+</div><!--col-->
+</div><!--row -->
+</div> <!-- container -->
+
+<footer class="nd-pagefooter">
+  <div class="row">
+    <div class="col-6 col-md text-center">
+      <a href="https://cs7150.baulab.info/">About CS 7150</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+<script>
+$(document).on('click', '.clickselect', function(ev) {
+  var range = document.createRange();
+  range.selectNodeContents(this);
+  var sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+});
+// Google analytics below.
+window.dataLayer = window.dataLayer || [];
+</script>
+</html>
