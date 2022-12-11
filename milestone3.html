@@ -1,124 +1,221 @@
 <!doctype html>
 <html lang="en">
-<head>
-<title>CS 7150 Drug Discovery</title>
-<meta property="og:title" content=Your Project Name" />
-<meta name="twitter:title" content="Your Project Name" />
-<meta name="description" content="Your project about your cool topic described right here." />
-<meta property="og:description" content="Your project about your cool topic described right here." />
-<meta name="twitter:description" content="Your project about your cool topic described right here." />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<!-- bootstrap for mobile-friendly layout -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-<link href="style.css" rel="stylesheet">
-<style>
+  <head>
+    <title>CS 7150 Drug Discovery</title>
+    <meta property="og:title" content="Your Project Name" />
+    <meta name="twitter:title" content="Your Project Name" />
+    <meta name="description" content="Your project about your cool topic
+      described right here." />
+    <meta property="og:description" content="Your project about your cool topic
+      described right here." />
+    <meta name="twitter:description" content="Your project about your cool topic
+      described right here." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- bootstrap for mobile-friendly layout -->
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous">
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+      rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
 .fcc-btn {
   float: left;
 }
 </style>
-</head>
-<body class="nd-docs">
-<div class="nd-pageheader">
- <div class="container">
- <h1 class="lead">
- <nobr class="widenobr">Graph Convolutions and Drug Discovery</nobr>
- <nobr class="widenobr">For CS 7150</nobr>
- </h1>
- </div>
-</div><!-- end nd-pageheader -->
+  </head>
+  <body class="nd-docs">
+    <div class="nd-pageheader">
+      <div class="container">
+        <h1 class="lead">
+          <nobr class="widenobr">Graph Convolutions and Drug Discovery</nobr>
+          <nobr class="widenobr">For CS 7150</nobr>
+        </h1>
+      </div>
+    </div><!-- end nd-pageheader -->
+
+    <div class="container"> <!-- container 123 -->
+      <div class="row"> <!-- row abc -->
+        <div class="col justify-content-center text-center"> <!-- cell w/ link to previous write-ups -->
+          <h4 style="color:white">
+            <a href="index.html">Proposal and Milestone</a></h4>
+          <h1>
+            Final Report
+          </h1>
+          <h2>
+            Can Graph Convolutions Improve Drug Discovery for Alzheimer's
+            Disease?
+          </h2>
+        </div>
+      </div> <!-- end row abc -->
+      <br>
+      <br>
+      <div class="row"> <!-- row introduction -->
+        <div class="col">
+          <h3>Introduction</h3>
+          <p>
+            afaeafaegaeaga
+          </p>
+          <hr>
+        </div>
+        <br><br>
+      </div> <!-- end row introduction -->
+      <div class="row"> <!-- row background -->
+        <div class="col">
+          <h3>Background</h3>
+        </div>
+      </div> <!-- end row background -->
+
+      <br><br>
+
+      <div class="row"> <!-- row background1 - message passing row -->
+        <div class="col"> <!-- col text for mpn -->
+          <p>
+            The figure to the right describes the message passing functions
+            of graph neural network. We decided to work with graphs becuase
+            molecular structure resembles a graph such that the atoms are
+            represented by nodes and bonds are
+            represented by edges.
+            The features of a atoms like atom type are represented in a matrix
+            format. So the node embedding update phase just requires matrix
+            multiplication with graph filters. The size of the filter is decided
+            by
+          </p>
+        </div> <!-- end col text for mpn -->
+
+        <div class="col"> <!-- col mpnimage with message pass image -->
+          <img style="border:1px solid black;" src="mainDiagram.png", alt="Graph
+            Neural Network" width="600">
+          <br>
+        </div> <!-- end col mpnimage -->
+        <br><br>
+      </div><!-- end row background1 -->
+
+      <br><br>
+
+      <div class="row"> <!-- row background2 - message passing row -->
+
+        <div class="col"> <!-- col text for laplacian -->
+          <p>
+            text for the second image (we can also convert the three images on
+            the right into a single
+            tall image, and that would make the text on the left hand side more
+            clean. )
+          </p>
+        </div> <!-- end col text for graph laplacian -->
+
+        <div class="col"> <!-- col laplacian image -->
+          <img style="border:1px solid black;" src="laplacian.png", alt="Graph
+            Neural Network" width="600">
+          <br>
+        </div> <!-- end col graph_laplacian image -->
+        <br><br>
+      </div><!-- end row background2 -->
+
+      <br><br>
+
+      <div class="row"> <!-- row background3 - math row -->
+
+        <div class="col"> <!-- col text for math -->
+          <p>
+            text for the third image .afafaewfagaegr
+          </p>
+        </div> <!-- end col text for math -->
+
+        <div class="col"> <!-- col math image -->
+          <img style="border:1px solid black;" src="nodeEmbedding.png",
+            alt="Graph
+            Neural Network" width="600">
+          <br>
+        </div> <!-- end col math image -->
+
+      </div><!-- end row background3 -->
+      <br><br>
+      <hr>
+      <div>
+        <h3>Method</h3>
+        <br>
+        <h5>Data Collection</h5>
+        <p>
+          Compound and training data was collected from the PubChem Online Database. PubChem comtains chemical information 
+          for more than 9 billion compounds and the results of thousands of experiments performed in labs across the world. For 
+          this analysis, we used experimental data from PubChem Bioassay 1285 (INSERT LINK). This assay evaluated 193,771 compounds 
+          in their ability to inhibit levels of Amyloid Precursor Protein (APP). Of these 193,771 compounds, we were able to use the 
+          PubChem compound database to extract relevant chemical information (SMILES) for each of the compounds.
+          <br><br>
+          For the nomination data, chemical information for 10,000 compounds were downloaded from the ChembL database, 
+          another well known chemical library. The purpose of the nomination set is to nominate new compounds that have yet to be 
+          tested in a lab for their ability to reduce levels of the protein. For this reason the 10,000 compounds chosen were 
+          confirmed to not exist in the 193,771 compounds included in the training data.
+          <br><br>
+          <h5>Data Preparation</h5>
+      </div>
+      <br><br>
+      <hr>
+      <h3>Results</h3>
+
+      <br><br>
+      <hr>
+      <h4>Next Steps</h4>
+      <br><br>
+      <hr>
+
+      <ul>
+        <li> Model building : The current model implemented in our project
+          is the out-of-the-box model provided by DeepChem. We would like to
+          use our current results to
+          build off of this model and create custom layers and parameters.
+        </li>
+        <li> Experiment and performance comparison(In progress): We will use
+          support vector machine as an alternative model. It takes Morgan
+          fingerprint as an input \
+          and performs classification. We will then do comparison of the
+          performance of neural network model and SVM. If time permits we
+          will try to build random forest model and compare its performance
+          with feed-forward neural network model
+        </li>
+      </ul>
 
 
+      <br>
+      <h5><a
+          href='https://github.com/hjombach/Drug_Discovery_Alzheimers_Protein'>
+          GitHub Link</a></h5>
+      <br>
+      <hr>
+      <h3>References</h3>
 
 
-<div class="container">
-<div class="row">
-<div class="col justify-content-center text-center">
-<h2 style="background-color:blue;color:white">
-<a href="index.html">Milestone 1&2</a>
-</h2>  
+      <h2>Team Members</h2>
 
-<h3>Milestone 3</h3>
-<h2>Can Graph Convolutions Improve Drug Discovery for Alzheimer's Disease?</h2>
-</div>
-</div>
-<div class="row">
-<div class="col">
-<br><br>
-<h3>Main Figure</h3>
-<img  src="mainDiagram.png" alt="Graph Neural Network" width="700" height="350"><br>
-<p>
-     The above figure succintly describes the message passing functions of graph neural network. We decided to work with graphs becuase molecular structure resembles a graph 
- such that the atoms are represented by nodes and bonds are represented by edges. 
-  The features of a atoms like atom type are represented in a matrix format. So the node embedding update phase just requires matrix multiplication with
-graph filters. The size of the filter is decided by 
-</p>                                                                               
-                                                                               
-<img  src="laplacian.png" alt="Graph Neural Network" width="700" height="350"><br> 
-<p>Filter </p>
-<img  src="nodeEmbedding.png" alt="Graph Neural Network" width="700" height="350"><br> 
-<p> Node embedding update</p>
-<br><br>
-<hr>                                                                              
-<h3>Introduction</h3>
-<br><br>
-<hr>                
-<h3>Background</h3>
-                                                                              
-<br><br>
-<hr>                                                                              
-<h3>Method</h3>
-                                                                              
-<br><br>
-<hr>                                                                              
-<h3>Results</h3>
-                                                                              
-<br><br>
-<hr>                                                                              
-<h4>Next Steps</h4>
-<br><br>
-<hr>                                                                              
-
-<ul>
-  <li> Model building : The current model implemented in our project is the out-of-the-box model provided by DeepChem. We would like to use our current results to
-    build off of this model and create custom layers and parameters.
-  </li>
-  <li> Experiment and performance comparison(In progress): We will use support vector machine as an alternative model. It takes Morgan fingerprint as an input \
-    and performs classification. We will then do comparison of the performance of neural network model and SVM. If time permits we will try to build random forest model and compare its performance with feed-forward neural network model
-  </li>
-</ul>
+      <p>Afsar Equebal and Hendrik Ombach. <br>
 
 
-<br>
-<h5><a href='https://github.com/hjombach/Drug_Discovery_Alzheimers_Protein'> GitHub Link</a></h5>
-<br>
-<hr>
-<h3>References</h3>
+        <!--col</div>--col-->
+      </div><!-- end row cat -->
+    </div> <!-- end container 123 -->
 
+    <footer class="nd-pagefooter">
+      <div class="row">
+        <div class="col-6 col-md text-center">
+          <a href="https://cs7150.baulab.info/">About CS 7150</a>
+        </div>
+      </div>
+    </footer>
 
-<h2>Team Members</h2>
-
-<p>Afsar Equebal and Hendrik Ombach. <br>
-
-
-</div><!--col-->
-</div><!--row -->
-</div> <!-- container -->
-
-<footer class="nd-pagefooter">
-  <div class="row">
-    <div class="col-6 col-md text-center">
-      <a href="https://cs7150.baulab.info/">About CS 7150</a>
-    </div>
-  </div>
-</footer>
-
-</body>
-<script>
+  </body>
+  <script>
 $(document).on('click', '.clickselect', function(ev) {
   var range = document.createRange();
   range.selectNodeContents(this);
@@ -130,3 +227,19 @@ $(document).on('click', '.clickselect', function(ev) {
 window.dataLayer = window.dataLayer || [];
 </script>
 </html>
+
+
+
+<!-- 
+        <img style="border:1px solid black;"src="laplacian.png" alt="Graph Neural Network" width="500">
+          <br>
+        <p>
+          Filter 
+        </p> -->
+<!-- <img style="border:1px solid black;" src="nodeEmbedding.png" alt="Graph Neural Network" width="500"><br>
+        <p> Node embedding update</p>
+        <br><br>
+        <hr>
+
+        <br><br>
+        <hr> -->
