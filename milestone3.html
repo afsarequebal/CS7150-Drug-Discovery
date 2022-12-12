@@ -258,6 +258,13 @@
           </p>
         </div>
         <h6><b>Support Vector Machine Model </b></h6>
+        The SVC is initialized as below by using scikit-library model: <br><br>
+        <ul>
+           <li>SVC(kernel='rbf', 
+            class_weight='balanced', # penalize
+            probability=True, C = 10) </li>
+           </ul>
+        <h6><b>Feed forward Network Model </b></h6>
         <ul>
            <li>Three Feed forward network of size 1024 and 256 </li>
            <li>Each feed forward Network is followed by dropout of 0.2 </li>
@@ -266,8 +273,15 @@
               <li>100 epochs</li>
               <li>Cross-Entropy Loss Function</li>
            </ul>
-        <h6><b>Feed forward Network Model </b></h6>
         <h6><b>Custom Graph Neural network </b></h6>
+        <ul>
+           <li>Five different variations with number of graph neural network layers = 2, 3, 4,5 and 6</li>
+           <li>Feed forward network of size 16 and 32 and a sigmoid function </li>
+           <li>ADAM optimizer</li>
+              <li>Learning Rate 0.0001</li>
+              <li>100 epochs</li>
+              <li>Cross-Entropy Loss Function</li>
+           </ul>
 
         <br><br>
         <hr>
