@@ -227,8 +227,11 @@
             <br><br>
             <h6><b>Data preparation for Support Vector Machine and Feed Forward Network</b></h6>
             <p>Simple feed forward network requires input in the format of a matrix. So we have used API from RDKIT library. It takes as input a SMILES string and provides an object of molecular structure. The object is transformed into vector format by method rdMolDescriptors.GetMorganFingerprintAsBitVect of rdkit library. This ouptut is called morgan fingerprint. </p>
-            <p>Contrary to this, graph neural network works with one hot encoding matrices of atom type, bond type and features like chirality, electrical charge of molecules. An example of a node object is Data(x=[25, 79], edge_index=[2, 54], edge_attr=[54, 10], y=[1]). Here x is the node index, edge index and edge attribute are edge index, and y is 1, if the compound can inhibit the progress of protein. Below figure represents molecular object and its finger print representation.
+            <p>Contrary to this, graph neural network works with one hot encoding matrices of atom type, bond type and features like chirality, electrical charge of molecules. An example of a node object is Data(x=[25, 79], edge_index=[2, 54], edge_attr=[54, 10], y=[1]). Here x is the node index, edge index and edge attribute are edge index, and y is 1, if the compound can inhibit the progress of protein. Below figure represents molecular object, its finger print representation, adjacency matrix and feature matrices.
               <br><img src="fingerprint.png",
+              alt="Graph
+              Neural Network" width="900">
+              <br><img src="adjMatrix.png",
               alt="Graph
               Neural Network" width="900"></p>
             <br><br>
