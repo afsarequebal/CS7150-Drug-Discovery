@@ -79,7 +79,8 @@ tr:nth-child(even) {
           <p>
             The use of neural networks to predict novel treatments of disease is
             widespread, and includes many areas of medicine and disease.
-            Alzheimer's Disease is a  well known disease that impacts the lives of many people. The
+            Alzheimer's Disease is a well known disease that impacts the lives
+            of many people. The
             amyloid peptides play a large role in the pathogenesis of the
             disease,largely related to their dysfunction <a
               href="https://pubmed.ncbi.nlm.nih.gov/24493463/">[2]</a>. Although
@@ -98,7 +99,8 @@ tr:nth-child(even) {
             the discovery of a novel antibiotic, one that was structurally
             unique to other antibiotics. The proposed project for this course
             involves the reproduction and alteration of Collins work with
-            antibiotics to predict novel compounds which may be effective in the treatment of
+            antibiotics to predict novel compounds which may be effective in the
+            treatment of
             Alzheimer's Disease, via interaction with the amyloid peptide. <br><br>
           </p>
           <hr>
@@ -115,67 +117,63 @@ tr:nth-child(even) {
 
       <div class="row"> <!-- row background1 - message passing row -->
         <div class="col"> <!-- col text for mpn -->
-          <p>We decided to work with graphs becuase
-            molecular structure resembles a graph such that the atoms are
+          <p>We decided to work with graphs becuase molecular structure
+            resembles a graph such that the atoms are
             represented by nodes and bonds are
             represented by edges.
-            The features of a atoms like atom type, and bond type are represented in a matrix
-            format. The matrices are stored as node embedding. The drug discovery process requires finding similarity in the structure of the molecule. This is accomplished by message passing functionality. Each node embedding is multiplied by its neighbor node embedding. The number of neighbors a node can gather knowledge is defined in the filters similar to image convolution layers and hence the name graph convolution layers. The functionality of filter multiplication is described in below figure.
+            The features of a atoms like atom type, and bond type are
+            represented in a matrix
+            format. The matrices are stored as node embedding. The drug
+            discovery process requires
+            finding similarity in the structure of the molecule. This is
+            accomplished by message passing
+            functionality. Each node embedding is multiplied by its neighbor
+            node embedding. The number
+            of neighbors a node can gather knowledge is defined in the filters
+            similar to image convolution
+            layers and hence the name graph convolution layers. The
+            functionality of filter multiplication
+            is described in below figure.
+            <br><br>
+            The matrix in the right represent the laplacian of the adjacency
+            matrix. It can be
+            used to create polynomials of the form:
+            <img src="laplacian2.png", alt="Graph
+              Neural Network" width="450"><br>
+            Above polynomial is similar to filter's in CNN's.
+            We can make the polynomial of degree 1 and see how the nodes
+            combines it's
+            node embedding with its neighbors as shown below. Increasing the
+            degree will
+            increase the length of edges covered by a node.
+            <img src="laplacian3.png", alt="Graph
+              Neural Network" width="450"><br>
+            The update of node embedding after each iteration is described
+            below.
+
+            As shown in the right figure, h represents the node embedding. It is
+            updated k times which is the
+            number of hidden layers. At each layers, the laplacian polynomials
+            representing the weights of
+            the filters is multiplied with the hidden feature representation to
+            update the node embedding g.
+            A sigmoid functions is then applied to each node embedding to get
+            non-linearity.
+            The final output from graph neural network is flatten and passed
+            through a feed forward network
+            for classification.
+
           </p>
         </div> <!-- end col text for mpn -->
 
         <div class="col"> <!-- col mpnimage with message pass image -->
-          <img style="border:1px solid black;" src="mainDiagram.png", alt="Graph
+          <img src="background_images.png", alt="Graph
             Neural Network" width="600">
           <br>
         </div> <!-- end col mpnimage -->
         <br><br>
       </div><!-- end row background1 -->
 
-      <br><br>
-
-      <div class="row"> <!-- row background2 - message passing row -->
-
-        <div class="col"> <!-- col text for laplacian -->
-          <p>
-           The matrix in the right represent the laplacian of the adjacency matrix. It can be used to create polynomials of the form:
-           <img src="laplacian2.png", alt="Graph
-            Neural Network" width="300"><br>
-            Above polynomial is similar to filter's in CNN's.
-            We can make the polynomial of degree 1 and see how the nodes combines it's node embedding with its neighbors as shown below. Increasing the degree will increase the length of edges covered by a node.
-            <img src="laplacian3.png", alt="Graph
-            Neural Network" width="300"><br>
-            The update of node embedding after each iteration is described below.
-          </p>
-        </div> <!-- end col text for graph laplacian -->
-
-        <div class="col"> <!-- col laplacian image -->
-          <img style="border:1px solid black;" src="laplacian.png", alt="Graph
-            Neural Network" width="600">
-          <br>
-        </div> <!-- end col graph_laplacian image -->
-        <br><br>
-      </div><!-- end row background2 -->
-
-      <br><br>
-
-      <div class="row"> <!-- row background3 - math row -->
-
-        <div class="col"> <!-- col text for math -->
-          <p>
-            As shown in the right figure, h represents the node embedding. It is updated k times which is the number of hidden layers. At each layers, the laplacian polynomials representing the weights of the filters is multiplied with the hidden feature representation to update the node embedding g. A sigmoid functions is then applied to each node embedding to get non-linearity.
-            The final output from graph neural network is flatten and passed through a feed forward network for classification.
-          </p>
-        </div> <!-- end col text for math -->
-
-        <div class="col"> <!-- col math image -->
-          <img style="border:1px solid black;" src="nodeEmbedding.png",
-            alt="Graph
-            Neural Network" width="600">
-          <br>
-        </div> <!-- end col math image -->
-
-      </div><!-- end row background3 -->
       <br><br>
       <hr>
       <div>
@@ -237,15 +235,36 @@ tr:nth-child(even) {
             test set had equally proportional data in terms of
             class balance.
             <br><br>
-            <h6><b>Data preparation for Support Vector Machine and Feed Forward Network</b></h6>
-            <p>Simple feed forward network requires input in the format of a matrix. So we have used API from RDKIT library. It takes as input a SMILES string and provides an object of molecular structure. The object is transformed into vector format by method rdMolDescriptors.GetMorganFingerprintAsBitVect of rdkit library. This ouptut is called morgan fingerprint. </p>
-            <p>Contrary to this, graph neural network works with one hot encoding matrices of atom type, bond type and features like chirality, electrical charge of molecules. An example of a node object is Data(x=[25, 79], edge_index=[2, 54], edge_attr=[54, 10], y=[1]). Here x is the node index, edge index and edge attribute are edge index, and y is 1, if the compound can inhibit the progress of protein. Below figure represents molecular object, its finger print representation, adjacency matrix and feature matrices.
-              <br><img src="fingerprint.png",
+            <h6><b>Data preparation for Support Vector Machine and Feed Forward
+                Network</b></h6>
+            <p>Simple feed forward network requires input in the format of a
+              matrix. So we have used API from
+              RDKIT library. It takes as input a SMILES string and provides an
+              object of molecular structure.
+              The object is transformed into vector format by method
+              rdMolDescriptors.GetMorganFingerprintAsBitVect
+              of rdkit library. This ouptut is called morgan fingerprint. </p>
+            <img src="smiles_morgan.png",
               alt="Graph
-              Neural Network" width="900">
-              <br><img src="adjMatrix.png",
+              Neural Network" width="1000">
+            <br>
+            <br>
+            <p>Contrary to this, graph neural network works with one hot
+              encoding matrices of atom type, bond
+              type and features like chirality, electrical charge of molecules.
+              An example of a node object is
+              Data(x=[25, 79], edge_index=[2, 54], edge_attr=[54, 10], y=[1]).
+              Here x is the node index, edge
+              index and edge attribute are edge index, and y is 1, if the
+              compound can inhibit the progress of
+              protein. Below figure represents molecular object, its finger
+              print representation, adjacency
+              matrix and feature matrices.
+            </p>
+            <br>
+            <img style="border:1px solid black;" src="adjMatrix.png",
               alt="Graph
-              Neural Network" width="900" height = "400"></p>
+              Neural Network" width="500">
             <br><br>
             <h5>Model Training</h5>
             The GraphConvModel provided by DeepChem was used as the baseline
@@ -272,204 +291,153 @@ tr:nth-child(even) {
         <h6><b>Support Vector Machine Model </b></h6>
         The SVC is initialized as below by using scikit-library model: <br><br>
         <ul>
-           <li>SVC(kernel='rbf', 
+          <li>SVC(kernel='rbf',
             class_weight='balanced', # penalize
             probability=True, C = 10) </li>
-           </ul>
+        </ul>
         <h6><b>Feed forward Network Model </b></h6>
         <ul>
-           <li>Two Feed forward network of size 1024 and 256 </li>
-           <li>Each feed forward Network is followed by dropout of 0.2 </li>
-           <li>ADAM optimizer</li>
-              <li>Learning Rate 0.0001</li>
-              <li>100 epochs</li>
-              <li>Cross-Entropy Loss Function</li>
-           </ul>
+          <li>Two Feed forward network of size 1024 and 256 </li>
+          <li>Each feed forward Network is followed by dropout of 0.2 </li>
+          <li>ADAM optimizer</li>
+          <li>Learning Rate 0.0001</li>
+          <li>100 epochs</li>
+          <li>Cross-Entropy Loss Function</li>
+        </ul>
         <h6><b>Custom Graph Neural network </b></h6>
         <ul>
-           <li>Five different variations with number of graph neural network layers = 2, 3, 4,5 and 6</li>
-           <li>Above GNN is followed by a feed forward network of size 16 and 32 and a sigmoid function </li>
-           <li>ADAM optimizer</li>
-              <li>Learning Rate 0.0001</li>
-              <li>100 epochs</li>
-              <li>Cross-Entropy Loss Function</li>
-           </ul>
+          <li>Five different variations with number of graph neural network
+            layers = 2, 3, 4,5 and 6</li>
+          <li>Above GNN is followed by a feed forward network of size 16 and 32
+            and a sigmoid function </li>
+          <li>ADAM optimizer</li>
+          <li>Learning Rate 0.0001</li>
+          <li>100 epochs</li>
+          <li>Cross-Entropy Loss Function</li>
+        </ul>
 
         <br><br>
         <hr>
         <h3>Results</h3>
         <br>
-        <div class="row"> <!-- row background1 - message passing row -->
-          <div class="col"> <!-- col text for mpn -->
-            <p>
-              As mentioned in data preparation, we have created model of Support Vector Machines, Simple Feed Forward Network, Custom Graph Neural Network and imported Graph Neural Network from Deep chem Library. We have summarized the results in the confusion matrix below:
-            </p>
-            <h6><b>Support Vector Machines</b></h6>
-            <table>
-              <tr>
-                <th></th>
-                <th>Predicted InActive</th>
-                <th>Predicted Active</th>
-              </tr>
-              <tr>
-                <th>True Inactive</th>
-                <td>7682</td>
-                <td>3</td>
-              </tr>
-              <tr>
-                <th>True Active</th>
-                <td>60</td>
-                <td>4</td>
-              </tr>
-            </table> 
-            <br>
-            <h6><b>Feed Forward Network</b></h6>
-            <table>
-              <tr>
-                <th></th>
-                <th>Predicted InActive</th>
-                <th>Predicted Active</th>
-              </tr>
-              <tr>
-                <th>True Inactive</th>
-                <td>38312</td>
-                <td>113</td>
-              </tr>
-              <tr>
-                <th>True Active</th>
-                <td>316</td>
-                <td>6</td>
-              </tr>
-            </table>  
-            <br>
-            <h6><b>Custom Graph Neural Network</b></h6>
-            <table>
-              <tr>
-                <th></th>
-                <th>Predicted InActive</th>
-                <th>Predicted Active</th>
-              </tr>
-              <tr>
-                <th>True Inactive</th>
-                <td>17350</td>
-                <td>1863</td>
-              </tr>
-              <tr>
-                <th>True Active</th>
-                <td>87</td>
-                <td>72</td>
-              </tr>
-            </table> 
-          <p><b>Below are some of the graphs for loss and accuracy compared to epochs for Custom Graph neural network</b></p>
-          <img src="roc.png", alt="Graph Neural Network" width = "600" height="400">
-          <p>Fig 1: ROC curve<p>
-          <br>
-
-          <img src="epochvsloss2.png", alt="Graph Neural Network" width = "600" height="400">
-          <p>Fig 2: Epoch Vs Loss for Custom GNN<p>
-          <br>
-
-          <img src="epochvsacc2.png", alt="Graph Neural Network" width = "600" height="400">
-          <p>Fig 3: Epoch Vs Validation Accuracy for Custom GNN<p>
-          <br>
-
-          <img src="accvslayers.png", alt="Graph Neural Network" width = "600" height="400">
-          <p>Fig 4: Number of GNN layers Vs Accuracy for Custom GNN<p>
-          <br>
-          </div> <!-- end col text for mpn -->
-
-        </div><!-- end row background1 -->
-
-        <br><br>
-
-
-
-
+        <div class="row"> <!-- row -->
+          <div class="col"> <!-- col  -->
+            Afsar, right few sentences on the custom model development. How it was done, what you think of
+            the results.
+          </div> <!-- end col -->
+        </div> <!-- end row -->
+        <br>
         <div class="row"> <!-- row -->
           <div class="col"> <!-- col  -->
             <br><br>
-            <h5>Graph Neural Network Model Results</h5>
+            <img style="border:1px solid black;"  src="graphs3.png", alt="Graph Neural Network" width="900">
             <br><br>
           </div> <!-- end col -->
         </div> <!-- end row -->
-
-        <div class="row"> <!-- row nomination images-->
-          <div class="col"> <!-- col nomination images 1 -->
-            <h5>CHEMBL1981307</h5>
-            <img style="border:1px solid black;" src="drug_1.png",
-              alt="Graph
-              Neural Network" height="180">
-          </div> <!-- end col nomination images 1 -->
-
-          <div class="col"> <!-- col nomination images 2 -->
-            <h5>CHEMBL224682</h5>
-            <img style="border:1px solid black;" src="drug_2.png",
-              alt="Graph
-              Neural Network" height="180">
-            <br>
-          </div> <!-- end col nomination images 2 -->
-
-          <div class="col"> <!-- col nomination images 3 -->
-            <h5>CHEMBL234282</h5>
-            <img style="border:1px solid black;" src="drug_3.png",
-              alt="Graph
-              Neural Network" height="180">
-            <br>
-          </div> <!-- end col nomination images 3 -->
-        </div> <!-- end row nomination images-->
-
-
-        <br><br>
-        <hr>
-        <h4>Next Steps</h4>
-        <br><br>
-        <hr>
-
-        <ul>
-          <li> Model building : The current model implemented in our project
-            is the out-of-the-box model provided by DeepChem. We would like to
-            use our current results to
-            build off of this model and create custom layers and parameters.
-          </li>
-          <li> Experiment and performance comparison(In progress): We will use
-            support vector machine as an alternative model. It takes Morgan
-            fingerprint as an input \
-            and performs classification. We will then do comparison of the
-            performance of neural network model and SVM. If time permits we
-            will try to build random forest model and compare its performance
-            with feed-forward neural network model
-          </li>
-        </ul>
-
-
-        <br>
-        <h5><a
-            href='https://github.com/hjombach/Drug_Discovery_Alzheimers_Protein'>
-            GitHub Link</a></h5>
-        <br>
-        <hr>
-        <h3>References</h3>
-
-
-        <h2>Team Members</h2>
-
-        <p>Afsar Equebal and Hendrik Ombach. <br>
-
-
-          <!--col</div>--col-->
-        </div><!-- end row cat -->
-      </div> <!-- end container 123 -->
-
-      <footer class="nd-pagefooter">
-        <div class="row">
-          <div class="col-6 col-md text-center">
-            <a href="https://cs7150.baulab.info/">About CS 7150</a>
+        <div class="row"> <!-- row first row of results -->
+          <div class="col"> <!-- col text initial results -->
+            <p>
+              As mentioned in data preparation, we have created model of Support
+              Vector Machines,
+              Simple Feed Forward Network, Custom Graph Neural Network and
+              imported Graph Neural
+              Network from Deep chem Library. We have summarized the results in
+              the confusion matrix
+              below:
+            </p>
           </div>
-        </div>
-      </footer>
+          <div class="col"> <!-- first row - confusion matrix image column-->
+            <img src="confusion_matrices.png", alt="Graph Neural Network" width="300">
+          </div> <!--end of confusion matrix image column-->
+        </div> <!--end of first row results-->
 
-    </body>
-    <script>
+
+
+  <div class="row"> <!-- row nomination images-->
+    <div class="col"> <!-- col nomination images 1 -->
+      <h5>CHEMBL1981307</h5>
+      <img style="border:1px solid black;" src="drug_1.png",
+        alt="Graph
+        Neural Network" height="180">
+    </div> <!-- end col nomination images 1 -->
+
+    <div class="col"> <!-- col nomination images 2 -->
+      <h5>CHEMBL224682</h5>
+      <img style="border:1px solid black;" src="drug_2.png",
+        alt="Graph
+        Neural Network" height="180">
+      <br>
+    </div> <!-- end col nomination images 2 -->
+
+    <div class="col"> <!-- col nomination images 3 -->
+      <h5>CHEMBL234282</h5>
+      <img style="border:1px solid black;" src="drug_3.png",
+        alt="Graph
+        Neural Network" height="180">
+      <br>
+    </div> <!-- end col nomination images 3 -->
+  </div> <!-- end row nomination images-->
+
+
+  <br><br>
+  <hr>
+  <h4>Next Steps</h4>
+  <br><br>
+  <hr>
+
+  <ul>
+    <li> Model building : The current model implemented in our
+      project
+      is the out-of-the-box model provided by DeepChem. We
+      would like to
+      use our current results to
+      build off of this model and create custom layers and
+      parameters.
+    </li>
+    <li> Experiment and performance comparison(In progress):
+      We will use
+      support vector machine as an alternative model. It takes
+      Morgan
+      fingerprint as an input \
+      and performs classification. We will then do comparison
+      of the
+      performance of neural network model and SVM. If time
+      permits we
+      will try to build random forest model and compare its
+      performance
+      with feed-forward neural network model
+    </li>
+  </ul>
+
+
+  <br>
+  <h5><a
+      href='https://github.com/hjombach/Drug_Discovery_Alzheimers_Protein'>
+      GitHub Link</a></h5>
+    <br>
+    <hr>
+    <h3>References</h3>
+
+
+    <h2>Team Members</h2>
+
+    <p>Afsar Equebal and Hendrik Ombach. <br>
+
+
+      <!--col</div>--col-->
+    </div><!-- end row cat -->
+  </div> <!-- end container 123 -->
+
+<footer class="nd-pagefooter">
+  <div class="row">
+    <div class="col-6 col-md text-center">
+      <a href="https://cs7150.baulab.info/">About CS 7150</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+<script>
 $(document).on('click', '.clickselect', function(ev) {
   var range = document.createRange();
   range.selectNodeContents(this);
@@ -480,20 +448,60 @@ $(document).on('click', '.clickselect', function(ev) {
 // Google analytics below.
 window.dataLayer = window.dataLayer || [];
 </script>
-  </html>
+              </html>
 
 
 
-  <!-- 
+              <!-- 
         <img style="border:1px solid black;"src="laplacian.png" alt="Graph Neural Network" width="500">
           <br>
         <p>
           Filter 
         </p> -->
-  <!-- <img style="border:1px solid black;" src="nodeEmbedding.png" alt="Graph Neural Network" width="500"><br>
+              <!-- <img style="border:1px solid black;" src="nodeEmbedding.png" alt="Graph Neural Network" width="500"><br>
         <p> Node embedding update</p>
         <br><br>
         <hr>
 
         <br><br>
         <hr> -->
+              <!-- <div class="row">  row background2 - message passing row 
+
+        <div class="col"> col text for laplacian 
+          <p>
+           The matrix in the right represent the laplacian of the adjacency matrix. It can be used to create polynomials of the form:
+           <img src="laplacian2.png", alt="Graph
+            Neural Network" width="300"><br>
+            Above polynomial is similar to filter's in CNN's.
+            We can make the polynomial of degree 1 and see how the nodes combines it's node embedding with its neighbors as shown below. Increasing the degree will increase the length of edges covered by a node.
+            <img src="laplacian3.png", alt="Graph
+            Neural Network" width="300"><br>
+            The update of node embedding after each iteration is described below.
+          </p>
+        </div> <!-- end col text for graph laplacian 
+
+        <div class="col"> <!-- col laplacian image 
+          <img style="border:1px solid black;" src="laplacian.png", alt="Graph
+            Neural Network" width="600">
+          <br>
+        </div> <!-- end col graph_laplacian image
+        <br><br>
+      </div>end row background2 -->
+              <!-- 
+      <div class="row">  row background3 - math row 
+
+        <div class="col"> <!-- col text for math
+          <p>
+            As shown in the right figure, h represents the node embedding. It is updated k times which is the number of hidden layers. At each layers, the laplacian polynomials representing the weights of the filters is multiplied with the hidden feature representation to update the node embedding g. A sigmoid functions is then applied to each node embedding to get non-linearity.
+            The final output from graph neural network is flatten and passed through a feed forward network for classification.
+          </p>
+        </div> <!-- end col text for math
+
+        <div class="col"> <!-- col math image
+          <img style="border:1px solid black;" src="nodeEmbedding.png",
+            alt="Graph
+            Neural Network" width="600">
+          <br>
+        </div> <!-- end col math image
+
+      </div><!-- end row background3 -->
