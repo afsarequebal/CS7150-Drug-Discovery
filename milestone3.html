@@ -128,11 +128,11 @@
           <p>
            The matrix in the right represent the laplacian of the adjacency matrix. It can be used to create polynomials of the form:
            <img src="laplacian2.png", alt="Graph
-            Neural Network" width="400"><br>
+            Neural Network" width="300">
             Above polynomial is similar to filter's in CNN's.
             We can make the polynomial of degree 1 and see how the nodes combines it's node embedding with its neighbors as shown below. Increasing the degree will increase the length of edges covered by a node.
             <img src="laplacian3.png", alt="Graph
-            Neural Network" width="400"><br>
+            Neural Network" width="300">
             The update of node embedding after each iteration is described below.
           </p>
         </div> <!-- end col text for graph laplacian -->
@@ -151,7 +151,7 @@
 
         <div class="col"> <!-- col text for math -->
           <p>
-            text for the third image .afafaewfagaegr
+            As shown in the right figure, h represents the node embedding. It is updated k times which is the number of hidden layers. As each layers, the laplacian polynomials representing the weights of the filters is multiplied with the hidden feature representation to update the node embedding g. A sigmoid functions is applied to each node embedding to get non-linearity.
           </p>
         </div> <!-- end col text for math -->
 
