@@ -104,14 +104,13 @@
       <div class="row"> <!-- row background1 - message passing row -->
         <div class="col"> <!-- col text for mpn -->
           <p>
-            The figure to the right describes the message passing functions
+            The figure to the right describes the utilizes the message passing framework to transfer node embedding 
             of graph neural network. We decided to work with graphs becuase
             molecular structure resembles a graph such that the atoms are
             represented by nodes and bonds are
             represented by edges.
-            The features of a atoms like atom type are represented in a matrix
-            format. So the node embedding update phase just requires matrix
-            multiplication with graph filters. The size of the filter is decided
+            The features of a atoms like atom type, and bond type are represented in a matrix
+            format. The matrices are stored as node embedding. The drug discovery process requires finding similarity in the structure of the molecule. This is accomplished by message passing functionality. Each node embedding is multiplied by its neighbor node embedding. The number of neighbors a node can gather knowledge is defined in the filters similar to image convolution layers and hence the name graph convolution layers. The functionality of filter multiplication is described in below figure.
             by
           </p>
         </div> <!-- end col text for mpn -->
