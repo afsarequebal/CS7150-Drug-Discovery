@@ -302,7 +302,7 @@ tr:nth-child(even) {
         <div class="row"> <!-- row background1 - message passing row -->
           <div class="col"> <!-- col text for mpn -->
             <p>
-              As mentioned in data preparation, we have created model of Support Vector Machines, Simple Feed Forward Network, Custom Graph Neural Network and imported Graph Neural Network from Deep chem Library. We have summarized the results below:
+              As mentioned in data preparation, we have created model of Support Vector Machines, Simple Feed Forward Network, Custom Graph Neural Network and imported Graph Neural Network from Deep chem Library. We have summarized the results in the confusion matrix below:
             </p>
             <h6><b>Support Vector Machines</b></h6>
             <table>
@@ -360,7 +360,22 @@ tr:nth-child(even) {
                 <td>72</td>
               </tr>
             </table> 
+          <p><b>Below are some of the graphs for loss and accuracy compared to epochs for Custom Graph neural network</b></p>
+          <img src="roc.png", alt="Graph Neural Network" height="180">
+          <p>Fig 1: ROC curve<p>
+          <br><br>
 
+          <img src="epochvsloss2.png", alt="Graph Neural Network" height="180">
+          <p>Fig 2: Epoch vs Loss for Custom GNN<p>
+          <br><br>
+
+          <img src="epochvsacc2.png", alt="Graph Neural Network" height="180">
+          <p>Fig 3: Epoch vs Validation Accuracy for Custom GNN<p>
+          <br><br>
+
+          <!--<img src="drug_1.png", alt="Graph Neural Network" height="180">-->
+          <p>TBD Fig 4: Epoch vs Number of GNN layers for Custom GNN<p>
+          <br><br>
           </div> <!-- end col text for mpn -->
 
         </div><!-- end row background1 -->
