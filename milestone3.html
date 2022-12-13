@@ -80,16 +80,15 @@ tr:nth-child(even) {
             The use of neural networks to predict novel treatments of disease is
             widespread, and includes many areas of medicine and disease.
             Alzheimer's Disease is a well known disease that impacts the lives
-            of many people. The
-            amyloid peptides play a large role in the pathogenesis of the
+            of many people. The amyloid peptides play a large role in the pathogenesis of the
             disease,largely related to their dysfunction <a
-              href="https://pubmed.ncbi.nlm.nih.gov/24493463/">[2]</a>. Although
+              href="https://pubmed.ncbi.nlm.nih.gov/24493463/">[1]</a>. Although
             the Disease impacts such a large population,
             little is known about the underlying biological mechanism as a
             whole, and thus treatments are limited.
             <br><br>
             In 2020, Collins and colleagues <a
-              href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[1]</a>
+              href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[2]</a>
             were able to utilize graph convolutions to produce trainable
             molecular features for use in their neural networks.
             These trainable features were then fed into a feed-forward neural
@@ -119,15 +118,11 @@ tr:nth-child(even) {
         <div class="col"> <!-- col text for mpn -->
           <p>We decided to work with graphs becuase molecular structure
             resembles a graph such that the atoms are
-            represented by nodes and bonds are
-            represented by edges.
+            represented by nodes and bonds are represented by edges.
             The features of a atoms like atom type, and bond type are
-            represented in a matrix
-            format. The matrices are stored as node embedding. The drug
-            discovery process requires
-            finding similarity in the structure of the molecule. This is
-            accomplished by message passing
-            functionality. Each node embedding is multiplied by its neighbor
+            represented in a matrix format. The matrices are stored as node embedding. The drug
+            discovery process requires finding similarity in the structure of the molecule. This is
+            accomplished by message passing functionality. Each node embedding is multiplied by its neighbor
             node embedding. The number
             of neighbors a node can gather knowledge is defined in the filters
             similar to image convolution
@@ -162,7 +157,6 @@ tr:nth-child(even) {
             The final output from graph neural network is flatten and passed
             through a feed forward network
             for classification.
-
           </p>
         </div> <!-- end col text for mpn -->
 
@@ -170,13 +164,15 @@ tr:nth-child(even) {
           <img src="background_images.png", alt="Graph
             Neural Network" width="600">
           <br>
+         <p> &emsp; *Images taken from articles by <a href = "https://distill.pub/2021/gnn-intro/" >Sanchez</a> 
+          and <a href="https://distill.pub/2021/understanding-gnns/">Daigavane</a></p> 
         </div> <!-- end col mpnimage -->
         <br><br>
       </div><!-- end row background1 -->
 
-      <br><br>
+      <br>
       <hr>
-      <div>
+      <div> <!-- Div for entire results section-->
         <h3>Method</h3>
         <br>
         <h5>Data Collection</h5>
@@ -186,22 +182,57 @@ tr:nth-child(even) {
           for more than 9 billion compounds and the results of thousands of
           experiments performed in labs across the world. For
           this analysis, we used experimental data from PubChem Bioassay 1285
-          (INSERT LINK). This assay evaluated 193,771 compounds
+          <a
+            href="https://pubchem.ncbi.nlm.nih.gov/bioassay/1285">[3]</a>. 
+            This assay evaluated 193,771 compounds
           in their ability to inhibit levels of Amyloid Precursor Protein (APP).
           Of these 193,771 compounds, we were able to use the
           PubChem compound database to extract relevant chemical information
           (SMILES) for each of the compounds.
           <br><br>
           For the nomination data, chemical information for 10,000 compounds
-          were downloaded from the ChembL database,
+          were downloaded from the <a href="https://www.ebi.ac.uk/chembl/"> ChEMBL </a> database,
           another well known chemical library. The purpose of the nomination set
           is to nominate new compounds that have yet to be
           tested in a lab for their ability to reduce levels of the protein. For
           this reason the 10,000 compounds chosen were
           confirmed to not exist in the 193,771 compounds included in the
-          training data.
+          original data.
           <br><br>
           <h5>Data Preparation</h5>
+          <br>
+            <h6><b>Morgan Fingerprints</b></h6>
+            <p>Simple feed forward network requires input in the format of a
+              matrix. So we have used API from
+              <a href="https://www.rdkit.org/"> RDKit</a> library. It takes as input a SMILES string and provides an
+              object of molecular structure.
+              The object is transformed into vector format by method
+              rdMolDescriptors.GetMorganFingerprintAsBitVect
+              of RDKit library. This output is called morgan fingerprint. </p>
+            <img src="smiles_morgan.png",
+              alt="Graph
+              Neural Network" width="1050">
+            <br>
+            <br>
+            <div class='row'>
+            <div class = 'col'>
+              <h6><b>Graph Representations</b></h6>
+            <p>Contrary to this, graph neural network works with one hot
+              encoding matrices of atom type, bond type and features like chirality, electrical charge of molecules.
+              An example of a node object in our libraries would like similar to this: <i>Data(x=[25, 79], edge_index=[2, 54], edge_attr=[54, 10], y=[1]</i>.
+              In this example, x is the node index, edge index and edge attribute are edge index, and y is activity label (1), 
+              indicating the compound inhibits the level of APP. The figure to the right represents molecular object, its finger
+              print representation, adjacency matrix and feature matrices.
+            </p>
+            </div>
+            <br>
+            <div class = 'col'> 
+              <img style="border:1px solid black;" src="adjMatrix.png",
+              alt="Graph
+              Neural Network" width="475">
+            </div>
+          </div>
+          <br><br>
           <p>
             DeepChem is a Python library/framework that is often used in the
             Deep Learning and Chemistry fields.
@@ -234,41 +265,33 @@ tr:nth-child(even) {
             function within DeepChem. This ensured the training, validation, and
             test set had equally proportional data in terms of
             class balance.
+            <br>
+            <br>
+            <h5>Model Initialization and Training</h5>
+            <br>
+            The <b>Support Vector Classifier</b> from the scikit-learn Python library was used as the baseline model 
+            to compare with our deep learning models. The model was initialized using the following parameters: 
             <br><br>
-            <h6><b>Data preparation for Support Vector Machine and Feed Forward
-                Network</b></h6>
-            <p>Simple feed forward network requires input in the format of a
-              matrix. So we have used API from
-              RDKIT library. It takes as input a SMILES string and provides an
-              object of molecular structure.
-              The object is transformed into vector format by method
-              rdMolDescriptors.GetMorganFingerprintAsBitVect
-              of rdkit library. This ouptut is called morgan fingerprint. </p>
-            <img src="smiles_morgan.png",
-              alt="Graph
-              Neural Network" width="1000">
-            <br>
-            <br>
-            <p>Contrary to this, graph neural network works with one hot
-              encoding matrices of atom type, bond
-              type and features like chirality, electrical charge of molecules.
-              An example of a node object is
-              Data(x=[25, 79], edge_index=[2, 54], edge_attr=[54, 10], y=[1]).
-              Here x is the node index, edge
-              index and edge attribute are edge index, and y is 1, if the
-              compound can inhibit the progress of
-              protein. Below figure represents molecular object, its finger
-              print representation, adjacency
-              matrix and feature matrices.
-            </p>
-            <br>
-            <img style="border:1px solid black;" src="adjMatrix.png",
-              alt="Graph
-              Neural Network" width="500">
-            <br><br>
-            <h5>Model Training</h5>
+            <ul>
+              <li>RGB kernel</li>
+              <li>class_weight: balanced (to accomodate for class imbalance)</li>
+              <li>Squared L2 penalty <i>C = 10.0</i></li>
+            </ul>
+            <p>Aside from the SVC model, we evaluated three different deep learning models using the listed optimization parameters: </p>
+          <h6><b>Feed forward Network Model </b></h6>
+              <ul>
+                <li>Two Feed forward network of size 1024 and 256 </li>
+                <li>Each feed forward Network is followed by dropout of 0.2 </li>
+                <li>ADAM optimizer</li>
+                <li>Learning Rate 0.0001</li>
+                <li>100 epochs</li>
+                <li>Cross-Entropy Loss Function</li>
+              </ul>
+
+            <b>GraphConvModel</b> <br>
             The GraphConvModel provided by DeepChem was used as the baseline
-            Graph Neural Network model for our analyses. From this model
+            Graph Neural Network model for our analyses. It is built on top of the 
+            tensorflow Python library. From this model
             we tuned the parameters to determine which architecture provided the
             best performance on our validation set. The architecture
             of the final model included: <br><br>
@@ -277,137 +300,131 @@ tr:nth-child(even) {
               <li>One feed-forward fully connected layer</li>
               <li>Dropout (p = 0.5)</li>
               <li>Batch Normalization</li>
-              <li>Softmax Function</li>
-            </ul>
-            The parameters chosen to optimize the model: <br><br>
-            <ul>
               <li>ADAM optimizer</li>
               <li>Learning Rate 0.001</li>
               <li>50 epochs</li>
               <li>Cross-Entropy Loss Function</li>
             </ul>
-          </p>
-        </div>
-        <h6><b>Support Vector Machine Model </b></h6>
-        The SVC is initialized as below by using scikit-library model: <br><br>
-        <ul>
-          <li>SVC(kernel='rbf',
-            class_weight='balanced', # penalize
-            probability=True, C = 10) </li>
-        </ul>
-        <h6><b>Feed forward Network Model </b></h6>
-        <ul>
-          <li>Two Feed forward network of size 1024 and 256 </li>
-          <li>Each feed forward Network is followed by dropout of 0.2 </li>
-          <li>ADAM optimizer</li>
-          <li>Learning Rate 0.0001</li>
-          <li>100 epochs</li>
-          <li>Cross-Entropy Loss Function</li>
-        </ul>
-        <h6><b>Custom Graph Neural network </b></h6>
-        <ul>
-          <li>Five different variations with number of graph neural network
-            layers = 2, 3, 4,5 and 6</li>
-          <li>Above GNN is followed by a feed forward network of size 16 and 32
-            and a sigmoid function </li>
-          <li>ADAM optimizer</li>
-          <li>Learning Rate 0.0001</li>
-          <li>100 epochs</li>
-          <li>Cross-Entropy Loss Function</li>
-        </ul>
 
-        <br><br>
-        <hr>
+          <h6><b>Custom Graph Neural network </b></h6>
+          The custom GNN was tested with multiple different hyperparameters to find the best performing model. 
+          Among these tested parameters include: <br><br>
+              <ul>
+                <li>Five different variations with number of graph neural network
+                  layers = 2, 3, 4,5 and 6</li>
+                <li>Feed forward fully-conntect layers of size 16 and 32
+                  and a sigmoid function </li>
+                <li>ADAM optimizer</li>
+                <li>Learning Rate 0.0001</li>
+                <li>100 epochs</li>
+                <li>Cross-Entropy Loss Function</li>
+              </ul>
+
+        </div>
+        <br><hr>
         <h3>Results</h3>
         <br>
         <div class="row"> <!-- row -->
           <div class="col"> <!-- col  -->
-            Afsar, right few sentences on the custom model development. How it was done, what you think of
-            the results.
+            The three plots below represent the loss and accuracy metrics after training for 100 epochs. 
+            The third image demonstrations how the number of graph convolutional layers greatly 
+            impact the performance of the model. This is likely due to the 'message-passing' mechanisms of 
+            graph neural networks, in that the number of graph convolutional layers determines how many 'hops'
+            each node (atom in our case) can take to communicate or send information to other nodes.
           </div> <!-- end col -->
         </div> <!-- end row -->
-        <br>
         <div class="row"> <!-- row -->
           <div class="col"> <!-- col  -->
             <br><br>
-            <img style="border:1px solid black;"  src="graphs3.png", alt="Graph Neural Network" width="900">
+            <img style="border:1px solid black;"  src="graphs3.png", alt="Graph Neural Network" width=1000">
             <br><br>
           </div> <!-- end col -->
         </div> <!-- end row -->
         <div class="row"> <!-- row first row of results -->
           <div class="col"> <!-- col text initial results -->
             <p>
-              As mentioned in data preparation, we have created model of Support
-              Vector Machines,
-              Simple Feed Forward Network, Custom Graph Neural Network and
-              imported Graph Neural
-              Network from Deep chem Library. We have summarized the results in
-              the confusion matrix
-              below:
+              The confusion matrix for each of our tuned models after passing our test data through the models
+              is below. It should be noted that SVC was only 
+              able to be run on a subset of the data because of the time taken to train the model. Aside from 
+              the SVC, each of the models predicted a considerable number of drugs to be active relative to the 
+              true number of compounds. The DeepChem Graph Neural Network however appeared to perform the best 
+              when considering the pros and cons of the precision and recall metrics. 
             </p>
+              <img src="results_gnn.png", alt="Graph Neural Network" width="1000">
+              <br>
           </div>
-          <div class="col"> <!-- first row - confusion matrix image column-->
-            <img src="confusion_matrices.png", alt="Graph Neural Network" width="300">
-          </div> <!--end of confusion matrix image column-->
-        </div> <!--end of first row results-->
+        </div> <!--end of first row results, text and confusion matrix-->
+        <br>
+        <div class ="row">
+          
+          <h5>Nominating New Drugs</h5>
+          <p>
+            As our Graph Neural Network using the DeepChem library provided the best results 
+            according to our needs, we wanted to use an untested library (nomination set) of compounds to evaluate 
+            'new' potential drugs that could be tested in-lab. In the biotech industry, this is the 
+            case when you are hoping to develop new drugs. 
+            <br><br>
+            Out of the 10,000 drugs in our nomination set, after creating graph representations and passing 
+            them through our trained DeepChem model, 1,366 compounds were predicted as active against the Amyloid 
+            Precursor Protein. Although this number is more than we would have liked, we used our knowledge 
+            of drug development and biology to further refine these drug nominations and rank them according to 
+            various metrics. We will not go into detail, however there is a guideline in the drug development industry 
+            that if a compound violates more than one property out of 5 pre-defined properties, there is a good chance 
+            the drug will not work in humans <a
+            href="https://www.sciencedirect.com/science/article/pii/B9780128037522000119">[4]</a>. Therefore we filtered out compounds that violated any of these 5 assumptions 
+            and subsequently ranked them by another drug-nomination metric (QED) <a
+            href="https://pubmed.ncbi.nlm.nih.gov/22270643/">[5]</a>. After this procedure we 
+            have come up with three new compounds that we are 'nominating' to be explored as novel drugs in the 
+            reduction of Amyloid Precursor Protein with the goal of reducing symptoms of Alzheimer's Disease.
+          </p>
+          <br>
+        </div>
+        <div class="row"> <!-- row nomination images-->
+          <div class="col"> <!-- col nomination images 1 -->
+            <h5>CHEMBL1981307</h5>
+            <img style="border:1px solid black;" src="drug_1.png",
+              alt="Graph
+              Neural Network" height="180">
+          </div> <!-- end col nomination images 1 -->
+
+          <div class="col"> <!-- col nomination images 2 -->
+            <h5>CHEMBL224682</h5>
+            <img style="border:1px solid black;" src="drug_2.png",
+              alt="Graph
+              Neural Network" height="180">
+            <br>
+          </div> <!-- end col nomination images 2 -->
+
+          <div class="col"> <!-- col nomination images 3 -->
+            <h5>CHEMBL234282</h5>
+            <img style="border:1px solid black;" src="drug_3.png",
+              alt="Graph
+              Neural Network" height="180">
+            <br>
+          </div> <!-- end col nomination images 3 -->
+        </div> <!-- end row nomination images-->
+        <br>
+        <p>* All chemical images retrieved from PubChem.</p>
 
 
-
-  <div class="row"> <!-- row nomination images-->
-    <div class="col"> <!-- col nomination images 1 -->
-      <h5>CHEMBL1981307</h5>
-      <img style="border:1px solid black;" src="drug_1.png",
-        alt="Graph
-        Neural Network" height="180">
-    </div> <!-- end col nomination images 1 -->
-
-    <div class="col"> <!-- col nomination images 2 -->
-      <h5>CHEMBL224682</h5>
-      <img style="border:1px solid black;" src="drug_2.png",
-        alt="Graph
-        Neural Network" height="180">
-      <br>
-    </div> <!-- end col nomination images 2 -->
-
-    <div class="col"> <!-- col nomination images 3 -->
-      <h5>CHEMBL234282</h5>
-      <img style="border:1px solid black;" src="drug_3.png",
-        alt="Graph
-        Neural Network" height="180">
-      <br>
-    </div> <!-- end col nomination images 3 -->
-  </div> <!-- end row nomination images-->
-
-
-  <br><br>
+  <br>
   <hr>
-  <h4>Next Steps</h4>
-  <br><br>
-  <hr>
-
+  <!-- <h4>Next Steps</h4>
+        <br>
   <ul>
     <li> Model building : The current model implemented in our
-      project
-      is the out-of-the-box model provided by DeepChem. We
-      would like to
-      use our current results to
-      build off of this model and create custom layers and
-      parameters.
+      project is the out-of-the-box model provided by DeepChem. We
+      would like touse our current results to build off of this model and 
+      create custom layers andparameters.
     </li>
     <li> Experiment and performance comparison(In progress):
-      We will use
-      support vector machine as an alternative model. It takes
-      Morgan
-      fingerprint as an input \
-      and performs classification. We will then do comparison
-      of the
-      performance of neural network model and SVM. If time
-      permits we
-      will try to build random forest model and compare its
-      performance
-      with feed-forward neural network model
+      We will use support vector machine as an alternative model. It takes
+      Morgan fingerprint as an input and performs classification. We will then do comparison
+      of the performance of neural network model and SVM. If time
+      permits we will try to build random forest model and compare its
+      performance with feed-forward neural network model
     </li>
-  </ul>
+  </ul> -->
 
 
   <br>
@@ -417,11 +434,32 @@ tr:nth-child(even) {
     <br>
     <hr>
     <h3>References</h3>
+    <br>
+    <p>
+      <a href="https://github.com/chemprop/chemprop">[1] Bloom GS. Amyloid-β and tau: the trigger and bullet in Alzheimer disease pathogenesis. JAMA Neurol.
+        2014 Apr;71(4):505-8. doi: 10.1001/jamaneurol.2013.5847. PMID: 24493463.</a>
+        <br>
+        <br>
 
-
+      <a href="https://www.sciencedirect.com/science/article/pii/S0092867420301021?via%3Dihub">[2] Stokes, J.M., Yang, K..., Collins, J. (2020).
+      A Deep Learning Approach to Antibiotic Discovery, Cell, 180:4, 688-702.</a>
+      <br>
+      <br>
+      <a href="https://pubchem.ncbi.nlm.nih.gov/bioassay/1285"> [3] National Center for Biotechnology Information (2022). PubChem Bioassay Record for AID 1285, Source: Columbia University Molecular 
+      Screening Center. Retrieved December 13, 2022 from https://pubchem.ncbi.nlm.nih.gov/bioassay/1285</a>
+      <br>
+      <br>
+      <a href = "https://www.sciencedirect.com/science/article/pii/B9780128037522000119"> [4] Kenakin, Terry P. (2017). Chapter 11 - Pharmacology in Drug Discovery 
+        and Development (Second Edition), Pages 275-299, ISBN: 9780128037522. </a>
+        <br>
+        <br>
+      <a href = "https://pubmed.ncbi.nlm.nih.gov/22270643/">[5] Bickerton GR, Paolini GV, Besnard J, Muresan S, Hopkins AL. Quantifying the chemical beauty of 
+        drugs. Nat Chem. 2012 Jan 24;4(2):90-8. doi: 10.1038/nchem.1243. PMID: 22270643; PMCID: PMC3524573.</a>
+    </p>
     <h2>Team Members</h2>
 
     <p>Afsar Equebal and Hendrik Ombach. <br>
+      <br>
 
 
       <!--col</div>--col-->
